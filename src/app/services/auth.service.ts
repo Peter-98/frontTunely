@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { DbService } from './db.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 @Injectable({
@@ -10,7 +9,6 @@ export class AuthService {
   userData: any;
   constructor(
     public afs: AngularFirestore,
-    private dbService : DbService, 
     public afAuth: AngularFireAuth 
   ) {
     this.afAuth.authState.subscribe((user) => {
@@ -39,7 +37,7 @@ export class AuthService {
       this.afAuth.signOut()
       .then(() => {
         localStorage.removeItem('user');
-        this.dbService.unsubscribeOnLogOut();
+        // this.dbService.unsubscribeOnLogOut();
         resolve();
       }).catch((error) => {
         console.log(error);

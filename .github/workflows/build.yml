@@ -18,6 +18,9 @@ jobs:
       - name: Install Ionic
         run: npm install -g @ionic/cli
 
+      - name: Instal firebase
+        run: npm install firebase @angular/fire --save
+
       - name: Install app dependencies
         run: npm install
 
