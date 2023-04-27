@@ -1,0 +1,38 @@
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+ion-title.title-large {
+  color: #ffffff;
+  font-size: 20px;
+}
+
+img.custom-icon {
+  width: 20px; /* ajusta el ancho de la imagen */
+  height: 20px; /* ajusta la altura de la imagen */
+  margin: 0 auto; /* centra la imagen horizontalmente */
+}

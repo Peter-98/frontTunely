@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"> 
+      <ion-back-button></ion-back-button> 
+    </ion-buttons>
+    <ion-title>All Products</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="items" class="list-mini-content" padding>
+  <div *ngIf="items.length > 0" class="list-mini">
+    <ion-list> 
+      <ion-item *ngFor="let item of items"> 
+        <ion-thumbnail slot="start">
+          <img alt="" [src]="item.payload.doc.data().image">
+        </ion-thumbnail>
+        <ion-label>{{item.payload.doc.data().name}}</ion-label>
+        <ion-label>{{item.payload.doc.data().description}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

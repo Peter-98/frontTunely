@@ -1,0 +1,21 @@
+<ion-header [translucent]="true" collapse="fade">
+  <ion-toolbar>
+    <ion-title size="large">
+      Your Store
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/sign-up']">  
+        <img class="custom-icon" src="/assets/icon/add-user.png">
+      </ion-button>
+      <ion-button [routerLink]="['/login']">  
+        <img class="custom-icon" src="/assets/icon/enter.png">
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <ion-button [routerLink]="['/home-products']" fill="outline">All Products</ion-button>
+  </div>
+</ion-content>
