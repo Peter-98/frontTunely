@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,14 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  data = ""; 
 
+  results: Observable<any> | undefined;  
+
+  constructor(private router : Router) { }
+
+  goToNewPageNavigate() {
+    console.log("funciona");
+    this.router.navigate(["/tracks", this.data]); 
+  }
 }

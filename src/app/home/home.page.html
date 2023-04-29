@@ -1,8 +1,6 @@
 <ion-header [translucent]="true" collapse="fade">
-  <ion-toolbar>
-    <ion-title size="large">
-      Your Store
-    </ion-title>
+  <ion-toolbar color="translucent">
+    <img class="title-image" src="/assets/imgs/logo.png" width="150" height="50" />
     <ion-buttons slot="end">
       <ion-button [routerLink]="['/sign-up']">  
         <img class="custom-icon" src="/assets/icon/add-user.png">
@@ -14,8 +12,15 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div id="container">
-    <ion-button [routerLink]="['/home-products']" fill="outline">All Products</ion-button>
-  </div>
+<ion-content padding class="background" [fullscreen]="true">
+  <section class="banner" role="banner">
+    <h1>Life is music</h1>
+  </section>
+  <form action="" class="search-bar">
+    <input type="search" name="search" pattern=".*\S.*" required [(ngModel)]="data">  
+    <button class="search-btn" type="submit" (click)="goToNewPageNavigate()">
+      <span>Search</span>
+    </button>
+  </form>
+
 </ion-content>
