@@ -43,19 +43,22 @@ export class LoginPage implements OnInit {
     });
   }
 
-  tryLogin(value: { email: string; password: string; }){ 
-    this.authService.doLogin(value)
-    .then(res => {
-      this.router.navigate(["/products"]);
-    }, err => {
-      if (err.code === "auth/user-not-found") {
-        this.errorMessage = "El usuario no existe.";
-      } else if (err.code === "auth/wrong-password") {
-        this.errorMessage = "Contraseña incorrecta.";
-      } else {
-        this.errorMessage = err.message;
+  tryLogin(value: { email: string; password: string }) {
+    this.authService.doLogin(value).subscribe(
+      (token: string) => {
+        this.router.navigate(['/trackslist']);
+      },
+      (err: any) => {
+        if (err.code === 'auth/user-not-found') {
+          this.errorMessage = 'El usuario no existe.';
+        } else if (err.code === 'auth/wrong-password') {
+          this.errorMessage = 'Contraseña incorrecta.';
+        } else {
+          this.errorMessage = err.message;
+        }
+        console.log(err);
       }
-      console.log(err);
-    });
+    );
   }
+  
 }   

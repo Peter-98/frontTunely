@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-button slot="end" (click)="logout()" *ngIf="auth">
+      <ion-icon slot="icon-only" name="exit-outline"></ion-icon>
+    </ion-button>
+    <ion-title>All songs</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="search-container">
+    <div id="search-overlay" class="overlay">
+      <div id="search-bar" class="search-bar">
+        <ion-searchbar placeholder="Search song in spotify database" color="dark"
+          [(ngModel)]="searchTermSpotify" (keyup.enter)="goToTrackListData()"></ion-searchbar>
+          <ion-button (click)="goToTrackListData()" slot="end" color="tertiary">
+            <ion-icon name="search"  slot="start"></ion-icon> Search</ion-button>
+        <ion-button (click)="goToAddTrackListData()" slot="end" color="success">
+          <ion-icon name="cloud-upload-outline"  slot="start"></ion-icon> Upload song</ion-button>
+        <ion-button (click)="closeSearch()" slot="end" color="danger">
+          <ion-icon name="close-outline" slot="start"></ion-icon>Close</ion-button>
+      </div>
+    </div>
+    <ion-searchbar placeholder="Search song" color="dark" [(ngModel)]="searchTerm"
+    (ionChange)="searchTracks()"></ion-searchbar>
+    <ion-button (click)="openSearch()" slot="end">
+      <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+  <ion-list class="ion-no-padding">
+    <ng-container *ngIf="(results | async) as items">
+      <ng-container *ngIf="items.length > 0; else noResults">
+        <ion-card *ngFor="let item of items; let i = index">
+          <ng-container *ngIf="item.href; else showImage">
+            <img [src]="item.href" >
+          </ng-container>
+          <ng-template #showImage>
+            <img [src]="item.image" />
+          </ng-template>
+          <ion-card-header>
+            <ion-card-title>{{ item.name }}</ion-card-title>
+            <ion-card-subtitle>{{ item.artist }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-button color="primary" expand="block" (click)="viewDetails(item._id)">
+              Details
+            </ion-button>
+            <ion-button id="present-alert" expand="block" *ngIf="(auth && userId===item.userId)" color="danger" (click)="presentAlertConfirm(item._id)">
+              <ion-icon name="trash-outline" slot="start"></ion-icon>
+              Delete
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ng-container>
+      <ng-template #noResults>
+        <div class="ion-text-left">
+          No results
+        </div>
+      </ng-template>
+    </ng-container>
+  </ion-list>
+
+
+</ion-content>

@@ -45,16 +45,20 @@ export class SignUpPage implements OnInit {
     });
   }
 
-  tryRegister(value: { email: string; password: string; }){ 
+  tryRegister(value: { email: string; password: string }) {
     this.authService.doRegister(value)
-    .then(async res => {
-      await this.presentToast();
-      this.router.navigate(["/products"]);
-    }, err => {
-      this.errorMessage = err.message;
-      console.log(err);
-    })
+      .subscribe(
+        async (res: any) => {
+          await this.presentToast();
+          this.router.navigate(["/trackslist"]);
+        },
+        (err: any) => {
+          this.errorMessage = err.message;
+          console.log(err);
+        }
+      );
   }
+  
 
   async presentToast() {
     const toast = await this.toastController.create({

@@ -20,12 +20,28 @@ const routes: Routes = [
     loadChildren: () => import('./sign-up/sign-up.module').then( m => m.SignUpPageModule)
   },
   {
-    path: 'tracks/:searchTerm',
+    path: 'tracks/:searchTermSpotify',
     loadChildren: () => import('./tracks/tracks.module').then( m => m.TracksPageModule)
   },
   {
-    path: 'details',
+    path: 'details/:id',
     loadChildren: () => import('./details/details.module').then( m => m.DetailsPageModule)
+  },
+  {
+    path: 'trackslist',
+    loadChildren: () => import('./trackslist/trackslist.module').then( m => m.TrackslistPageModule)
+  },
+  {
+    path: 'trackslist/:searchTerm',
+    loadChildren: () => import('./trackslist/trackslist.module').then( m => m.TrackslistPageModule)
+  },
+  {
+    path: 'edit/:id',
+    loadChildren: () => import('./edit/edit.module').then( m => m.EditPageModule)
+  },
+  {
+    path: 'add-song',
+    loadChildren: () => import('./add-song/add-song.module').then( m => m.AddSongPageModule)
   }
 ];
 

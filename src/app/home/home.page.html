@@ -5,8 +5,11 @@
       <ion-button [routerLink]="['/sign-up']">  
         <img class="custom-icon" src="/assets/icon/add-user.png">
       </ion-button>
-      <ion-button [routerLink]="['/login']">  
+      <ion-button [routerLink]="['/login']" *ngIf="!auth">  
         <img class="custom-icon" src="/assets/icon/enter.png">
+      </ion-button>
+      <ion-button slot="end" (click)="logout()" *ngIf="auth">
+        <ion-icon slot="icon-only" name="exit-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -15,12 +18,16 @@
 <ion-content padding class="background" [fullscreen]="true">
   <section class="banner" role="banner">
     <h1>Life is music</h1>
-  </section>
+ 
   <form action="" class="search-bar">
     <input type="search" name="search" pattern=".*\S.*" required [(ngModel)]="data">  
-    <button class="search-btn" type="submit" (click)="goToNewPageNavigate()">
-      <span>Search</span>
+    <button class="search-btn" type="submit" (click)="goToTrackListData()">
     </button>
   </form>
+
+  <div class="text-box">
+    <button type="button" (click)="goToTrackList()" class="btn btn-white animated">All songs</button>
+  </div>
+</section>
 
 </ion-content>

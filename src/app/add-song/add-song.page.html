@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"> 
+      <ion-back-button defaultHref="trackslist"></ion-back-button> 
+    </ion-buttons>
+    <ion-title>Upload song</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="formValidation">
+
+    <form class="form" [formGroup]="formValidation" (ngSubmit)="onSubmit(formValidation.value)">
+      <ion-item>
+        <ion-label position="floating" color="primary">Title:</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="primary">Artists: </ion-label>
+        <ion-input type="text" formControlName="artist"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="primary">Album: </ion-label>
+        <ion-input type="text" formControlName="album"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="primary">Release Date: </ion-label>
+        <ion-input type="text" formControlName="releaseDate"></ion-input>
+        <div *ngIf="showReleaseDateError">
+          Release date should be in yyyy-mm-dd format
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="primary">Genres: </ion-label>
+        <ion-input type="text" formControlName="genres"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="primary">Duration: </ion-label>
+        <ion-input type="text" formControlName="duration"></ion-input>
+        <div *ngIf="showDurationError">
+          Duration should be a number
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" color="primary">Spotify URI: </ion-label>
+        <ion-input type="text" formControlName="uri"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="primary">Image URL: </ion-label>
+        <ion-input type="text" formControlName="image"></ion-input>
+        <div class="item-end" slot="end">
+          <ion-fab-button (click)="takePicture()"> 
+            <ion-icon name="camera"></ion-icon> 
+          </ion-fab-button>
+        </div>
+        <ion-img [src]="photo" [hidden]="!photo" *ngIf="!photo" (ionError)="onImgError()"></ion-img>
+      </ion-item>
+      <img alt=""  [src]="photo"> 
+      <ion-fab vertical="bottom" horizontal="center" slot="fixed"> 
+        <div class="div-button-create">
+          <ion-button type="submit"[disabled]="!isFormValid()" >Save Song</ion-button>
+        </div>
+      </ion-fab>
+    </form>
+    
+
+
+  </div>
+
+  
+
+</ion-content>

@@ -1,9 +1,144 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>details</ion-title>
+    <ion-buttons slot="start"> 
+      <ion-back-button defaultHref="trackslist"></ion-back-button> 
+    </ion-buttons>
+    <ion-title>Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+ 
+  <ion-card *ngIf="information">
+    <ion-card-header>
+      <ion-card-title>
+        {{ information.name }}
+      </ion-card-title>
+      <ion-card-subtitle>
+        {{ information.artist }}
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content text-center>
+      <ng-container *ngIf="information.href; else showImage">
+        <img [src]="information.href" class="info-img">
+      </ng-container>
+      <ng-template #showImage>
+        <img [src]="information.image" class="info-img"/>
+      </ng-template>
 
+      <ion-item lines="none">
+        <ion-icon name="musical-note-outline" slot="start"></ion-icon>
+        <ion-label>{{ information.genres }}</ion-label>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-icon name="cloud-upload-outline" slot="start"></ion-icon>
+        <ion-label>{{ information.releaseDate| date:'dd/MM/yyyy'}}</ion-label>
+      </ion-item>
+ 
+      <ion-item lines="none">
+        <ion-icon name="albums-outline" slot="start"></ion-icon>
+        <ion-label>{{ information.album }}</ion-label>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-icon name="time-outline" slot="start"></ion-icon>
+        <ion-label text-wrap> {{ convertDuration(information.duration) }}</ion-label>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-icon name="clipboard" slot="start"></ion-icon>
+        <ion-label text-wrap>{{ information.coords.type }}: ({{ information.coords.coordinates[0] }},{{ information.coords.coordinates[1] }})
+         Accuracy: {{ information.coords.coordinates[2] }}
+        </ion-label>
+      </ion-item>
+
+      <ion-button expand="block" *ngIf="(auth && userId===information.userId)" color="warning" (click)="goToEdit(information._id)">
+        Edit
+      </ion-button>
+
+      <ion-button  color="success" expand="block" (click)="openSpotify()" *ngIf="information.uri && information.uri != ''">
+        <ion-icon name="open" slot="start"></ion-icon>
+        Open in Spotify
+      </ion-button>
+      <ion-button id="open-modal" expand="block">Add comment</ion-button>
+      <p>{{ message }}</p>
+      <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)" (click)="takePosition()">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-button (click)="cancel()">Cancel</ion-button>
+              </ion-buttons>
+              <ion-title>Comment</ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding">
+            <ion-item>
+              <ion-label position="stacked">Enter your name:</ion-label>
+              <ion-input type="text" placeholder="Your name" [(ngModel)]="author"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Enter your comment:</ion-label>
+              <ion-textarea placeholder="Write your comment here!" [autoGrow]="true" [(ngModel)]="comment" [counter]="true" maxlength="1000">
+            </ion-textarea>
+            </ion-item>
+            <ion-item>
+              <ion-label>Rating: </ion-label>
+              <ion-rating-stars
+              [rating]="0"
+              [color]="'darkgrey'"
+              [filledColor]="'orange'"
+              [margin]="2"
+              [size]="20"
+              [disabled]="false"
+              [opacity]="0.5"
+              (ratingChange)="ratingChanged($event)"></ion-rating-stars>
+            </ion-item>
+                      
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-item>
+    <ion-label>
+      <h1>Comments</h1>
+    </ion-label>
+  </ion-item>
+
+  <section class="comments" *ngIf="information?.comments">
+    <ng-container *ngIf="information.comments.length > 0; else noComments">
+      <article class="comment" *ngFor="let comment of information.comments">
+        <a class="comment-img">
+          <img src="/assets/imgs/avatar.png" alt="" width="50" height="50">
+          <ion-icon class="icon2" name="accessibility-outline"  *ngIf="comment.userId" title="Registered user"></ion-icon>
+          <button ion-button class="icon-only-button"  title="Delete" *ngIf="(auth && userId===comment.userId) || (auth && !comment.userId)" (click)="presentAlertConfirm(information._id, comment._id)">
+            <ion-icon class="icon" name="trash-outline"></ion-icon>
+          </button>
+        </a>
+        <div class="comment-body">
+          <div class="text">
+            <p>{{comment.comment}}</p>
+          </div>
+          <ion-rating-stars [rating]="comment.rating" [disabled]="true"></ion-rating-stars>
+          <p class="attribution">by {{comment.author}} at {{comment.createdOn | date:'dd/MM/yyyy hh:mm:ss a'}}</p>
+          <p class="attribution">Point: ({{comment.coords.coordinates[0]}}, {{comment.coords.coordinates[1]}}). Accuracy: {{comment.coords.coordinates[2]}}</p>
+        </div>
+      </article>
+    </ng-container>
+    <ng-template #noComments>
+      <p style="margin-left: 80px">No comments</p>
+    </ng-template>
+  </section>
+  
+  
+  
+  ​
+  
 </ion-content>

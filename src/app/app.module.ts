@@ -6,7 +6,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AngularFireModule } from '@angular/fire/compat';
@@ -16,6 +16,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
+import { IonRatingStarsModule } from 'ion-rating-stars';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,8 +26,9 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFirestoreModule, 
     AngularFireAuthModule, 
     AngularFireStorageModule, 
-    AngularFireDatabaseModule, HttpClientModule],
+    AngularFireDatabaseModule, HttpClientModule, IonRatingStarsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

@@ -1,10 +1,14 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start"> 
-      <ion-back-button></ion-back-button> 
+      <ion-back-button defaultHref="trackslist" ></ion-back-button> 
     </ion-buttons>
     <ion-title>Tracks</ion-title>
+    <ion-button color="light" type="button" slot="end" [disabled]="!selected.length" (click)="sendSelectedResults()">
+      <ion-icon name="save-outline"></ion-icon>
+    </ion-button>
   </ion-toolbar>
+
 </ion-header>
 <ion-content>
 
@@ -17,7 +21,7 @@
         <ion-card-subtitle>{{ item.artist }}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <ion-button color="primary" expand="block" (click)="toggleSelected(i); $event.stopPropagation()">
+        <ion-button color="success" expand="block" (click)="toggleSelected(i); $event.stopPropagation()">
           {{isSelected(i) ? "REMOVE" : "ADD"}}
         </ion-button>
       </ion-card-content>

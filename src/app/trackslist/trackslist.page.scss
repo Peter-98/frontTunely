@@ -1,0 +1,141 @@
+@property --rotate {
+    syntax: "<angle>";
+    initial-value: 132deg;
+    inherits: false;
+  }
+  
+  ion-card {
+      margin-right: 10px;
+      margin-bottom: 10px;
+      display: inline-block;
+      vertical-align: top;
+      margin-inline: 10px;
+    }
+    
+    @media only screen and (max-width: 767px) {
+      ion-card {
+      width: calc(100%);
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 10px;
+        height: min-content;
+      }
+    }
+    .card-container {
+      width: 100%;
+      height: 100%;
+    }
+  ion-list{
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-auto-rows: 600px;
+
+
+      @media (max-width: 767px) {
+        grid-template-columns: repeat(1, 1fr);
+        grid-auto-rows: auto;
+      }
+  }
+
+
+  
+  
+  .selected {
+  
+    position: relative;
+    padding: 1%;
+    box-sizing: border-box;
+  
+    $border: 5px;
+    color: #FFF;
+    background: #ff0000;
+    background-clip: padding-box; /* !importanté */
+    border: solid $border transparent; /* !importanté */
+    border: 5px solid transparent;
+    border-radius: 1em;
+  
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      z-index: -1;
+      margin: -$border; /* !importanté */
+      border-radius: inherit; /* !importanté */
+      background-image: linear-gradient(
+      var(--rotate),
+      #5ddcff,
+      #3c67e3 43%,
+      #4e00c2
+    );
+    
+    animation: spin 2.5s linear infinite;
+     -webkit-background-clip: padding-box;
+      background-clip: padding-box;
+    }
+  }
+  
+  @keyframes spin {
+    0% {
+      --rotate: 0deg;
+    }
+    100% {
+      --rotate: 360deg;
+    }
+  }
+  ion-card.selected img {
+    border-radius: 1em;
+  }
+  
+  ion-card-header {
+    min-height: 120px;
+    height: auto;
+  } 
+  
+  ion-content{
+    background: #213423;
+  }
+
+  .ion-text-left{
+    margin-left: 20px;
+  }
+
+  .search-bar {
+    background-color: #fff;
+    border-radius: 5px;
+    margin: 20% auto;
+    width: 80%;
+    padding: 20px;
+    @media (max-width: 767px) {
+      margin: 50% auto;
+    }
+  }
+  
+  .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 9999;
+  }
+  
+  .overlay.show {
+    display: block;
+  }
+  .search-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 60%;
+  }
+
+  
