@@ -11,8 +11,6 @@ jobs:
       - name: Install git and rsync 📚
         run: |
           apk update && apk add git rsync
-      - name: Install Git
-        run: apk add --no-cache git
       - uses: actions/checkout@v2
       - name: Install Ionic
         run: npm install -g @ionic/cli
@@ -27,6 +25,8 @@ jobs:
         with:
           name: www
           path: www/
+      - name: List files
+        run: ls -a
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
