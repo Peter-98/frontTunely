@@ -12,9 +12,6 @@ jobs:
         run: |
           apk update && apk add git rsync
           - name: Configure Git
-      - run: |
-          git config --global user.name "Peter-98"
-          git config --global user.email "pma751@inlumine.ual.es"
       - uses: actions/checkout@v2
       - name: Install Ionic
         run: npm install -g @ionic/cli
