@@ -21,7 +21,7 @@ export class TracksService {
     console.log("Executing test operation...");
   }
 
-  url = 'http://localhost:3000/tracks'; 
+  url = 'http://webapps.pedromrtaguilera.tech:3000/tracks'; 
 
 
   constructor(private http: HttpClient) { } 

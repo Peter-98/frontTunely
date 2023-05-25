@@ -11,7 +11,7 @@ import 'firebase/compat/auth';
 export class AuthService {
 
 
-  url = 'http://localhost:3000/auth'; 
+  url = 'http://webapps.pedromrtaguilera.tech:3000/auth'; 
 
   postLogin(email: string, pass: string): Observable<string> {
     const body = {
