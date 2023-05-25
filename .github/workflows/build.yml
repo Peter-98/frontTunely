@@ -15,7 +15,7 @@ jobs:
       - name: Configure git
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git config --global --add safe.directory /__w/Peter-98.github.io/github-pages-deploy-action-temp-deployment-folder
+          git config --global --add safe.directory /__w/peter-98.github.io/github-pages-deploy-action-temp-deployment-folder
         working-directory: ../
       - uses: actions/checkout@v2
       - name: Install Ionic
