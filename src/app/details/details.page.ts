@@ -86,7 +86,9 @@ export class DetailsPage implements OnInit {
 
   async confirm() {
   if (this.author && this.comment) {
+    console.log('Antes de enviar');
     this.sendComment();
+    console.log('DESPUES de enviar');
     this.modal.dismiss(this.author, 'confirm');
   } else {
     // Si faltan campos, muestra una alerta
