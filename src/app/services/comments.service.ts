@@ -17,7 +17,7 @@ export class CommentsService {
 
   constructor(private http: HttpClient) { }
 
-  url = 'http://localhost:3000/tracks'; 
+  url = 'http://webapps.pedromrtaguilera.tech:3000/tracks'; 
 
   sendComment(author: string, comment: string, rating: number, trackId: string, userId: string, longitude: string, latitude: string, accuracy: string) {
     const body = { author, comment, rating, userId, longitude, latitude, accuracy };
