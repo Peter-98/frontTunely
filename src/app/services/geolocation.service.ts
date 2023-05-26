@@ -17,10 +17,18 @@ export class GeolocationService {
   accuracy: number | undefined;
 
   async getLocation() { 
-    const position = await Geolocation.getCurrentPosition(); 
-    this.latitude = position.coords.latitude;
-    this.longitude = position.coords.longitude;
-    this.accuracy = position.coords.accuracy;
+    try{
+      const position = await Geolocation.getCurrentPosition(); 
+      this.latitude = position.coords.latitude;
+      this.longitude = position.coords.longitude;
+      this.accuracy = position.coords.accuracy;
+    } catch (error) {
+      // Si hay un error al obtener la localización, establece los campos como undefined o valores predeterminados.
+      this.latitude = undefined;
+      this.longitude = undefined;
+      this.accuracy = undefined;
+      console.error('Error al obtener la localización:', error);
+    }
   }
 
   getPosition(): Promise<any> {

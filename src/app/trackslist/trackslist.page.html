@@ -25,7 +25,7 @@
     </div>
     <ion-searchbar placeholder="Search song" color="dark" [(ngModel)]="searchTerm"
     (ionChange)="searchTracks()"></ion-searchbar>
-    <ion-button (click)="openSearch()" slot="end">
+    <ion-button (click)="openSearch()"  *ngIf="(auth)" slot="end">
       <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
     </ion-button>
   </div>
