@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TracksService } from '../services/tracks.service';
 import { CommentsService } from '../services/comments.service';
-import { AlertController, IonModal } from '@ionic/angular';
+import { AlertController, IonModal, ModalController } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { AuthService } from '../services/auth.service'; //
 import { GeolocationService } from '../services/geolocation.service';
@@ -30,7 +30,7 @@ export class DetailsPage implements OnInit {
   ratingChang: EventEmitter<number> = new EventEmitter<number>();
   @ViewChild(IonModal) modal!: IonModal;
 
-  constructor(private geolocationService: GeolocationService, private alertController: AlertController, private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute, private tracksService: TracksService,  private commentService: CommentsService) {
+  constructor(private modalController: ModalController, private geolocationService: GeolocationService, private alertController: AlertController, private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute, private tracksService: TracksService,  private commentService: CommentsService) {
    }
  
   ngOnInit() {
@@ -86,9 +86,10 @@ export class DetailsPage implements OnInit {
 
   async confirm() {
   if (this.author && this.comment) {
-    console.log('Antes de enviar');
     this.sendComment();
-    console.log('DESPUES de enviar');
+    this.modalController.dismiss().then(() => {
+      window.location.reload();
+    });
     //this.modal.dismiss(this.author, 'confirm');
   } else {
     // Si faltan campos, muestra una alerta
