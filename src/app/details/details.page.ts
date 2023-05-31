@@ -30,7 +30,7 @@ export class DetailsPage implements OnInit {
   ratingChang: EventEmitter<number> = new EventEmitter<number>();
   @ViewChild(IonModal) modal!: IonModal;
 
-  constructor(private modalController: ModalController, private geolocationService: GeolocationService, private alertController: AlertController, private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute, private tracksService: TracksService,  private commentService: CommentsService) {
+  constructor(private modalController: ModalController, private geolocationService: GeolocationService, private alertController: AlertController, private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute, public tracksService: TracksService,  public commentService: CommentsService) {
    }
  
   ngOnInit() {
