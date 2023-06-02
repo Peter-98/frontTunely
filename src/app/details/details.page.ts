@@ -88,7 +88,9 @@ export class DetailsPage implements OnInit {
   if (this.author && this.comment) {
     this.sendComment();
     this.modalController.dismiss().then(() => {
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000); // 1000 milisegundos 
     });
     //this.modal.dismiss(this.author, 'confirm');
   } else {

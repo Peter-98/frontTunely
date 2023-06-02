@@ -1,5 +1,11 @@
 ion-content.background{
-	--background: url(../../assets/imgs/wp2.jpeg) 0 0/100% 100% no-repeat;
+	--background: url(../../assets/imgs/fondoMovil.jpeg) 0 0/100% 100% no-repeat;
+  }
+
+  @media only screen and (max-width: 600px) {
+	ion-content.background {
+	  --background: url(../../assets/imgs/fondoMovil.jpeg) 0 0/100% 100% no-repeat;
+	}
   }
   
   @font-face {   
@@ -32,10 +38,15 @@ ion-content.background{
 	margin-bottom: 1em;
   }
   
-  ion-toolbar {
-	--background-color: transparent;
-	--ion-color-base: transparent !important;
-  }
+  ion-header {
+	ion-toolbar {
+	  --background: #313338;
+	  --color: white;
+	}
+	ion-title {
+		color: white;
+	  }
+	}
   
   img.custom-icon {
 	width: 20px; /* ajusta el ancho de la imagen */
@@ -273,3 +284,30 @@ ion-content.background{
 	transition: 0s;
   }
 
+.btn {
+	background-color: var(--blue);
+	background-image: linear-gradient(90deg, var(--blue) 0%, var(--lightblue) 74%);
+	border-radius: 20px;
+	border: 1px solid var(--blue);
+	color: var(--white);
+	cursor: pointer;
+	font-size: 0.8rem;
+	font-weight: bold;
+	letter-spacing: 0.1rem;
+	padding: 0.9rem 4rem;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+
+.register{
+	background-color: var(--blue);
+	background-image: #333;
+	border-radius: 20px;
+	border: 1px solid var(--blue);
+	color: var(--white);
+	cursor: pointer;
+	font-size: 0.8rem;
+	font-weight: bold;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}

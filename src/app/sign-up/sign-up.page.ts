@@ -16,12 +16,12 @@ export class SignUpPage implements OnInit {
 
   formValidationMessages = { 
    'email': [
-     { type: 'required', message: 'El email es un campo obligatorio.' },
-     { type: 'pattern', message: 'El formato del email no es correcto.' }
+     { type: 'required', message: 'Email is a required field.' },
+     { type: 'pattern', message: 'The email format is not correct.' }
    ],
    'password': [
-     { type: 'required', message: 'La contraseña es un campo obligatorio.' },
-     { type: 'minlength', message: 'La lóngitud mínima de una contraseña es 6 caracteres.' }
+     { type: 'required', message: 'Password is a required field.' },
+     { type: 'minlength', message: 'The minimum length of a password is 6 characters.' }
    ]
  };
 
@@ -62,7 +62,7 @@ export class SignUpPage implements OnInit {
 
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Registro exitoso',
+      message: 'Successful registration',
       duration: 2000
     });
     toast.present();

@@ -14,15 +14,15 @@ export class LoginPage implements OnInit {
   errorMessage: string = ''; 
 
   formValidationMessages = { 
-   'email': [
-     { type: 'required', message: 'El email es un campo obligatorio.' },
-     { type: 'pattern', message: 'El formato del email no es correcto.' }
-   ],
-   'password': [
-     { type: 'required', message: 'La contraseña es un campo obligatorio.' },
-     { type: 'minlength', message: 'La lóngitud mínima de una contraseña es 6 caracteres.' }
-   ]
- };
+    'email': [
+      { type: 'required', message: 'Email is a required field.' },
+      { type: 'pattern', message: 'The email format is not correct.' }
+    ],
+    'password': [
+      { type: 'required', message: 'Password is a required field.' },
+      { type: 'minlength', message: 'The minimum length of a password is 6 characters.' }
+    ]
+  };
 
   constructor(
     private authService: AuthService, 
@@ -50,9 +50,9 @@ export class LoginPage implements OnInit {
       },
       (err: any) => {
         if (err.code === 'auth/user-not-found') {
-          this.errorMessage = 'El usuario no existe.';
+          this.errorMessage = 'Username does not exist.';
         } else if (err.code === 'auth/wrong-password') {
-          this.errorMessage = 'Contraseña incorrecta.';
+          this.errorMessage = 'Incorrect password.';
         } else {
           this.errorMessage = err.message;
         }
