@@ -22,6 +22,8 @@ jobs:
         run: npm install -g @ionic/cli
       - name: Install dependencies
         run: npm install --legacy-peer-deps
+      - name: Codacy Analysis CLI
+        uses: codacy/codacy-analysis-cli-action@v4.3.0
       - name: Build Ionic project
         run: |
           ionic build --prod -- --base-href http://pedromrtaguilera.tech/
