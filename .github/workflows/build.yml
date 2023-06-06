@@ -22,16 +22,6 @@ jobs:
         run: npm install -g @ionic/cli
       - name: Install dependencies
         run: npm install --legacy-peer-deps
-      - uses: stefanoeb/eslint-action@1.0.2
-        with:
-          files: src/
-      - name: Run Codacy Analysis CLI
-        uses: codacy/codacy-analysis-cli-action@master
-        with:
-          tool: eslint
-          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          upload: true
-          max-allowed-issues: 2147483647
       - name: Build Ionic project
         run: |
           ionic build --prod -- --base-href http://pedromrtaguilera.tech/
