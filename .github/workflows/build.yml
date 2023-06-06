@@ -34,7 +34,9 @@ jobs:
         run: apk add --no-cache chromium
 
       - name: Set Puppeteer environment variables
-        run: echo "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true" >> $GITHUB_ENV
+        run: |
+          echo "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true" >> $GITHUB_ENV
+          echo "CHROME_BIN=/usr/bin/chromium-browser" >> $GITHUB_ENV
 
       - name: Build Ionic project
         run: |
