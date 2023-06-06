@@ -56,7 +56,6 @@ export class AddSongPage implements OnInit {
       artist: new FormControl('', Validators.required),
       album: new FormControl('', Validators.required),
       releaseDate: new FormControl('',[Validators.required, Validators.pattern(/^\d{4}-\d{2}-\d{2}$/)]),
-      genres: new FormControl('', Validators.required),
       duration: new FormControl('',[Validators.required, Validators.pattern(/^-?\d*\.?\d+$/)]),
       uri: new FormControl('', Validators.required),
       image: new FormControl('')
@@ -105,13 +104,13 @@ export class AddSongPage implements OnInit {
     // No hace nada
   }
 
-  onSubmit(value: { name: any; artist: any; album: any; releaseDate: any; genres: any; duration: any; uri: any; image: any; }){ 
+  onSubmit(value: { name: any; artist: any; album: any; releaseDate: any; duration: any; uri: any; image: any; }){ 
     let data = {
       name: value.name,
       artist: value.artist,
       album: value.album,
       releaseDate: value.releaseDate,
-      genres: value.genres,
+      genres: '',
       duration: value.duration,
       uri: value.uri,
       userId: this.userId,
