@@ -29,11 +29,8 @@ jobs:
         run: |
           ionic build --prod -- --base-href http://pedromrtaguilera.tech/
           cp www/index.html www/404.html
-      - name: Install Firefox
-        run: |
-          apk add firefox-esr
-          export FIREFOX_BIN=/usr/bin/firefox
-          npm install -g karma-firefox-launcher
+      - name: Install chrome in puppeteer
+        run: npm i -D puppeteer karma-chrome-launcher
 
       - name: Run tests and generate coverage report
         run: ng test --no-watch --code-coverage
