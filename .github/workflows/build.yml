@@ -12,11 +12,14 @@ jobs:
         run: |
           apk update && apk add git rsync
         working-directory: ../
+
       - name: Configure git
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config --global --add safe.directory /__w/peter-98.github.io/github-pages-deploy-action-temp-deployment-folder
         working-directory: ../
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
       - uses: actions/checkout@v2
       - name: Install Ionic
         run: npm install -g @ionic/cli
