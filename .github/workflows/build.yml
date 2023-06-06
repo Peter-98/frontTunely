@@ -29,8 +29,11 @@ jobs:
         run: |
           ionic build --prod -- --base-href http://pedromrtaguilera.tech/
           cp www/index.html www/404.html
-      - name: install firefox
-        run: npm install karma-firefox-launcher --save-dev
+      - name: Install Firefox
+        run: |
+          apk add firefox-esr
+          export CHROME_BIN=/usr/bin/firefox
+          npm install karma-firefox-launcher --save-dev
 
       - name: Run tests and generate coverage report
         run: ng test --no-watch --code-coverage --browsers=Firefox
