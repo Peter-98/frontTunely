@@ -24,10 +24,10 @@ jobs:
         run: npm install --legacy-peer-deps
       - name: ESLint dependencies
         uses: stefanoeb/eslint-action@1.0.2
-      - name: Run Codacy Analysis CLI
-        uses: codacy/codacy-analysis-cli-action@master
         with:
           files: src/
+      - name: Run Codacy Analysis CLI
+        uses: codacy/codacy-analysis-cli-action@master
         with:
           tool: eslint
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
