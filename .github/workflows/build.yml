@@ -33,7 +33,7 @@ jobs:
         run: npm install phantomjs-prebuilt@2.1.16
 
       - name: Run tests and generate coverage report
-        run: ng test --no-watch --code-coverage --browsers=PhantomJS
+        run: ng test --no-watch --code-coverage --browsers=ChromeHeadless
       - name: Upload coverage report to Codacy
         run: |
           npm install -g codacy-coverage-reporter
