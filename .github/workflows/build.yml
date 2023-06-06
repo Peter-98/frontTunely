@@ -29,11 +29,11 @@ jobs:
         run: |
           ionic build --prod -- --base-href http://pedromrtaguilera.tech/
           cp www/index.html www/404.html
-      - name: Set Chrome binary path
-        run: export CHROME_BIN=/usr/bin/google-chrome-stable
+      - name: intall firefox
+        run: npm install karma-firefox-launcher --save-dev
 
       - name: Run tests and generate coverage report
-        run: ng test --no-watch --code-coverage --browsers=ChromeHeadless
+        run: ng test --no-watch --code-coverage --browsers=Firefox
       - name: Upload coverage report to Codacy
         run: |
           npm install -g codacy-coverage-reporter
