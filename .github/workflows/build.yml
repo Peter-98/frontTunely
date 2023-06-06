@@ -29,13 +29,11 @@ jobs:
         run: |
           ionic build --prod -- --base-href http://pedromrtaguilera.tech/
           cp www/index.html www/404.html
-      - name: Install Puppeteer
-        run: npm install puppeteer
+      - name: Set Chrome binary path
+        run: export CHROME_BIN=/usr/bin/google-chrome-stable
 
       - name: Run tests and generate coverage report
-        run: |
-          export CHROME_PATH=$(which google-chrome-stable)
-          ng test --no-watch --code-coverage --browsers=Puppeteer
+        run: ng test --no-watch --code-coverage --browsers=ChromeHeadless
       - name: Upload coverage report to Codacy
         run: |
           npm install -g codacy-coverage-reporter
