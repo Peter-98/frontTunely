@@ -36,7 +36,7 @@ jobs:
           npm install -g karma-firefox-launcher
 
       - name: Run tests and generate coverage report
-        run: ng test --no-watch --code-coverage --browsers=Firefox
+        run: ng test --no-watch --code-coverage
       - name: Upload coverage report to Codacy
         run: |
           npm install -g codacy-coverage-reporter
