@@ -26,18 +26,12 @@ jobs:
         with:
           files: src/
       - name: Run Codacy Analysis CLI
-        run: |
-          echo "CODACY_BASE_URL_OR_DEFAULT=\$(if [  ]; then echo ""; else echo "https://api.codacy.com"; fi)" >> $GITHUB_ENV
-        shell: sh
-      - name: Codacy Analysis CLI
-        run: |
-          npx codacy-analysis-cli analyze -t eslint -r results.json
-        shell: sh
-      - name: Upload results
-        uses: actions/upload-artifact@v2
+        uses: codacy/codacy-analysis-cli-action@v1.2.0
         with:
-          name: Codacy Analysis Results
-          path: results.json
+          tool: eslint
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          upload: true
+          max-allowed-issues: 2147483647
       - name: Build Ionic project
         run: |
           ionic build --prod -- --base-href http://pedromrtaguilera.tech/
