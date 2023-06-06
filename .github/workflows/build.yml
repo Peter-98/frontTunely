@@ -29,13 +29,11 @@ jobs:
         run: |
           ionic build --prod -- --base-href http://pedromrtaguilera.tech/
           cp www/index.html www/404.html
-      - name: Install Chromium
-        run: |
-          apt-get install -y chromium-browser
-          export CHROME_BIN=/usr/bin/chromium-browser
+      - name: Install PhantomJS
+        run: npm install phantomjs-prebuilt@2.1.16
 
       - name: Run tests and generate coverage report
-        run: ng test --no-watch --code-coverage --browsers=ChromeHeadless
+        run: ng test --no-watch --code-coverage --browsers=PhantomJS
       - name: Upload coverage report to Codacy
         run: |
           npm install -g codacy-coverage-reporter
