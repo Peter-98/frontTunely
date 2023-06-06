@@ -36,18 +36,29 @@ jobs:
       - name: Set Puppeteer environment variables
         run: |
           echo "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true" >> $GITHUB_ENV
-          echo "CHROME_BIN=/usr/bin/chromium-browser" >> $GITHUB_ENV
+          echo "CHROME_BIN=/usr/bin/google-chrome-stable" >> $GITHUB_ENV
+
+      - name: Install Puppeteer
+        run: npm install puppeteer
+
+      - name: Install Google Chrome
+        run: |
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          dpkg -i google-chrome-stable_current_amd64.deb
+          apt-get -f install
+
+      - name: Set Chrome SUID Sandbox
+        run: |
+          echo "sudo chown root:root /usr/libexec/chrome-sandbox" >> $GITHUB_ENV
+          echo "sudo chmod 4755 /usr/libexec/chrome-sandbox" >> $GITHUB_ENV
 
       - name: Build Ionic project
         run: |
           ionic build --prod -- --base-href http://pedromrtaguilera.tech/
           cp www/index.html www/404.html
 
-      - name: Install Puppeteer
-        run: npm install puppeteer
-
       - name: Run tests and generate coverage report
-        run: ng test --no-watch --code-coverage --browsers=ChromeHeadless
+        run: ng test --no-watch --code-coverage --browsers=Chrome
 
       - name: Upload coverage report to Codacy
         run: |
