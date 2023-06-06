@@ -1,4 +1,4 @@
-name: Build and Deploy 
+name: Build and Deploy
 
 on: [push, pull_request]
 
@@ -18,33 +18,47 @@ jobs:
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config --global --add safe.directory /__w/peter-98.github.io/github-pages-deploy-action-temp-deployment-folder
         working-directory: ../
+
       - name: Install Angular CLI
         run: npm install -g @angular/cli
+
       - uses: actions/checkout@v2
+
       - name: Install Ionic
         run: npm install -g @ionic/cli
+
       - name: Install dependencies
         run: npm install --legacy-peer-deps
+
       - name: Install Puppeteer dependencies
         run: apk add --no-cache chromium
+
       - name: Set Puppeteer environment variables
         run: echo "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true" >> $GITHUB_ENV
+
       - name: Build Ionic project
         run: |
           ionic build --prod -- --base-href http://pedromrtaguilera.tech/
           cp www/index.html www/404.html
+
+      - name: Install Puppeteer
+        run: npm install puppeteer
+
       - name: Run tests and generate coverage report
         run: ng test --no-watch --code-coverage --browsers=ChromeHeadless
+
       - name: Upload coverage report to Codacy
         run: |
           npm install -g codacy-coverage-reporter
           codacy-coverage-reporter report -l lcov -r ./coverage/app/lcov.info
         env:
           CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+
       - uses: actions/upload-artifact@v3
         with:
           name: www
           path: www/
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         if: contains(github.ref,'refs/heads/master')
