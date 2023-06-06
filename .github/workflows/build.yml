@@ -22,8 +22,6 @@ jobs:
         run: npm install -g @ionic/cli
       - name: Install dependencies
         run: npm install --legacy-peer-deps
-      - name: Checkout code
-        uses: actions/checkout@main
       - uses: stefanoeb/eslint-action@1.0.2
         with:
           files: src/
@@ -32,8 +30,6 @@ jobs:
         with:
           tool: eslint
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          # or
-          # api-token: ${{ secrets.CODACY_API_TOKEN }}
           upload: true
           max-allowed-issues: 2147483647
       - name: Build Ionic project
