@@ -8,9 +8,8 @@ jobs:
     container: circleci/node:12.18-browsers
 
     steps:
-      - name: Install git and rsync
-        run: |
-          sudo apt-get update && sudo apt-get install -y rsync
+      - name: Install busybox
+        run: apk add --no-cache busybox-extras
         working-directory: ../
 
       - name: Configure git
