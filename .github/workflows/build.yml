@@ -5,11 +5,12 @@ on: [push, pull_request]
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    container: circleci/node:12.18-browsers
+    container: node:16-alpine
 
     steps:
-      - name: Install busybox
-        run: apk add --no-cache busybox-extras
+      - name: Install git and rsync
+        run: |
+          apk update && apk add git rsync
         working-directory: ../
 
       - name: Configure git
@@ -28,6 +29,10 @@ jobs:
         run: |
           ionic build --prod -- --base-href http://pedromrtaguilera.tech/
           cp www/index.html www/404.html
+      - name: Install Puppeteer and karma-chrome-launcher
+        run: |
+          npm i -D puppeteer karma-chrome-launcher
+          export CHROME_BIN=$(npm explore -g karma-chrome-launcher -- pwd)/node_modules/.bin/chrome
       - name: Run tests and generate coverage report
         run: ng test --no-watch --code-coverage
       - name: Upload coverage report to Codacy
