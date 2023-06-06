@@ -27,7 +27,7 @@ jobs:
           ionic build --prod -- --base-href http://pedromrtaguilera.tech/
           cp www/index.html www/404.html
       - name: Run tests and generate coverage report
-        run: npm run test -- --single-run --reporters progress,coverage
+        run: ng test --no-watch --code-coverage
       - name: Upload coverage report to Codacy
         run: |
           npm install -g codacy-coverage-reporter
