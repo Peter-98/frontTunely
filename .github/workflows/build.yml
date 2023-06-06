@@ -1,4 +1,4 @@
-name: Build and Deploy 
+name: Build and Deploy with Codacy
 
 on: [push, pull_request]
 
@@ -30,6 +30,16 @@ jobs:
         with:
           name: www
           path: www/
+      - name: Install Codacy coverage script
+        run: bash <(curl -Ls https://coverage.codacy.com/get.sh)
+      - name: Run tests and generate coverage report
+        run: npm run tests -- --single-run --reporters progress,coverage
+      - name: Upload coverage report to Codacy
+        run: |
+          npm install -g codacy-coverage-reporter
+          codacy-coverage-reporter report -l <cobertura|lcov> -r ./coverage/report.xml
+        env:
+          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         if: contains(github.ref,'refs/heads/master')
