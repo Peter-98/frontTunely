@@ -32,7 +32,7 @@ jobs:
       - name: Install Firefox
         run: |
           apk add firefox-esr
-          export CHROME_BIN=/usr/bin/firefox
+          export FIREFOX_BIN=/usr/bin/firefox
           npm install karma-firefox-launcher --save-dev
 
       - name: Run tests and generate coverage report
