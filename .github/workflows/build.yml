@@ -29,8 +29,8 @@ jobs:
         run: |
           ionic build --prod -- --base-href http://pedromrtaguilera.tech/
           cp www/index.html www/404.html
-      - name: Install chrome in puppeteer
-       run: |
+      - name: Install Puppeteer and karma-chrome-launcher
+        run: |
           npm i -D puppeteer karma-chrome-launcher
           export CHROME_BIN=$(npm explore -g karma-chrome-launcher -- pwd)/node_modules/.bin/chrome
       - name: Run tests and generate coverage report
