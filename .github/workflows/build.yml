@@ -25,17 +25,17 @@ jobs:
         run: npm install -g @ionic/cli
       - name: Install dependencies
         run: npm install --legacy-peer-deps
-      - name: Set CHROME_BIN variable
-        run: echo "export CHROME_BIN=/usr/bin/google-chrome" >> $GITHUB_ENV
       - name: Build Ionic project
         run: |
           ionic build --prod -- --base-href http://pedromrtaguilera.tech/
           cp www/index.html www/404.html
-      - name: Install PhantomJS
-        run: npm install phantomjs-prebuilt@2.1.16
+      - name: Install Puppeteer
+        run: npm install puppeteer
 
       - name: Run tests and generate coverage report
-        run: ng test --no-watch --code-coverage --browsers=ChromeHeadless
+        run: |
+          export CHROME_PATH=$(which google-chrome-stable)
+          ng test --no-watch --code-coverage --browsers=Puppeteer
       - name: Upload coverage report to Codacy
         run: |
           npm install -g codacy-coverage-reporter
