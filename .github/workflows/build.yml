@@ -33,7 +33,7 @@ jobs:
         run: |
           apk add firefox-esr
           export FIREFOX_BIN=/usr/bin/firefox
-          npm install karma-firefox-launcher --save-dev
+          npm install -g karma-firefox-launcher
 
       - name: Run tests and generate coverage report
         run: ng test --no-watch --code-coverage --browsers=Firefox
