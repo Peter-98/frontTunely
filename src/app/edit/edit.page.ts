@@ -58,7 +58,6 @@ export class EditPage implements OnInit {
       artist: new FormControl(result.artist, Validators.required),
       album: new FormControl(result.album, Validators.required),
       releaseDate: new FormControl(fechaFormateada,[Validators.required, Validators.pattern(/^\d{4}-\d{2}-\d{2}$/)]),
-      genres: new FormControl(result.genres, Validators.required),
       duration: new FormControl(result.duration,[Validators.required, Validators.pattern(/^-?\d*\.?\d+$/)]),
       uri: new FormControl(result.uri, Validators.required),
       image: new FormControl(result.image)
@@ -109,13 +108,13 @@ export class EditPage implements OnInit {
     // No hace nada
   }
 
-  onSubmit(value: { name: any; artist: any; album: any; releaseDate: any; genres: any; duration: any; uri: any; image: any; }){ 
+  onSubmit(value: { name: any; artist: any; album: any; releaseDate: any; duration: any; uri: any; image: any; }){ 
     let data = {
       name: value.name,
       artist: value.artist,
       album: value.album,
       releaseDate: value.releaseDate,
-      genres: value.genres,
+      genres: '',
       duration: value.duration,
       uri: value.uri,
       userId: this.userId,
