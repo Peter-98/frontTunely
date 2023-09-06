@@ -30,7 +30,7 @@ jobs:
         with:
           name: www
           path: www/
-      - name: Deploy 🚀
+      - name: Deploy! 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         if: contains(github.ref,'refs/heads/master')
         with:
